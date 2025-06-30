@@ -1,0 +1,12 @@
+[build-system]
+requires = ["sip >=6.9, <7", "PyQt-builder >=1.17, <2"]
+build-backend = "sipbuild.api"
+
+[project]
+name = "QCefView"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+
+[tool.sip.bindings.QCefView]
+sip-file = "QCefView.sip"
