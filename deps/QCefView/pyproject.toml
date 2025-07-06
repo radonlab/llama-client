@@ -1,5 +1,5 @@
 [build-system]
-requires = ["sip >=6.9, <7", "PyQt-builder >=1.17, <2"]
+requires = ["sip >=6.9, <7", "PyQt-builder >=1.17, <2", "PyQt6"]
 build-backend = "sipbuild.api"
 
 [project]
@@ -8,5 +8,11 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 
+[tool.sip.project]
+name = "QCefView"
+sip-include-dirs = ["bindings"]
+
 [tool.sip.bindings.QCefView]
 sip-file = "QCefView.sip"
+qmake-QT = ["widgets"]
+include-dirs = ["src"]
