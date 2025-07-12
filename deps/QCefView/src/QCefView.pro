@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 CONFIG += staticlib
 
-QT += core gui widgets
+QT += core widgets
 
 HEADERS += \
     QCefView.h

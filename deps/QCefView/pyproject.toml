@@ -9,7 +9,6 @@ description = "Add your description here"
 readme = "README.md"
 
 [tool.sip.project]
-name = "QCefView"
 sip-include-dirs = ["bindings"]
 
 [tool.sip.bindings.QCefView]
