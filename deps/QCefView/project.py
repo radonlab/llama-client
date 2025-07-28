@@ -18,19 +18,16 @@ class QCefViewBindings(PyQtBindings):
         return options
 
     def apply_user_defaults(self, tool):
-        if sys.platform in ["win32", "linux"]:
-            self.include_dirs += [self.cef_incdir]
-            self.library_dirs += [self.cef_libdir]
-            self.libraries += [self.cef_lib]
-        elif sys.platform == "darwin":
+        if sys.platform == "darwin":
             self.include_dirs += [self.cef_incdir]
             self.extra_link_args += [
                 f"-F{self.cef_libdir}",
                 f"-framework {self.cef_lib}",
             ]
         else:
-            print(f"Unsupported operating system: {sys.platform}")
-            return
+            self.include_dirs += [self.cef_incdir]
+            self.library_dirs += [self.cef_libdir]
+            self.libraries += [self.cef_lib]
         return super().apply_user_defaults(tool)
 
 

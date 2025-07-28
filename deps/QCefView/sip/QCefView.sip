@@ -3,6 +3,8 @@
 %Import QtCore/QtCoremod.sip
 %Import QtWidgets/QtWidgetsmod.sip
 
+%Include QCefConfig.sip
+%Include QCefContext.sip
 %Include QCefSetting.sip
 
 class QCefView : public QWidget {
