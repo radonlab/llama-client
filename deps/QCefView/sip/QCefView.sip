@@ -10,6 +10,9 @@
 %Include QCefQuery.sip
 %Include QCefSetting.sip
 
+typedef int QCefBrowserId;
+typedef QString QCefFrameId;
+
 class QCefView : public QWidget {
 
 %TypeHeaderCode
@@ -19,6 +22,7 @@ class QCefView : public QWidget {
 public:
     static const QCefFrameId MainFrameID;
     static const QCefFrameId AllFrameID;
+
     enum CefWindowOpenDisposition {
         CefWindowOpenDispositionUnknown,
         CefWindowOpenDispositionCurrentTab,
@@ -32,7 +36,6 @@ public:
         CefWindowOpenDispositionIgnoreAction,
     };
 
-public:
     QCefView(const QString& url,
              const QCefSetting* setting,
              QWidget* parent = nullptr,
@@ -69,6 +72,8 @@ public:
     bool allowDrag() const;
     void setZoomLevel(double level);
     double zoomLevel();
+
+    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const;
 
 signals:
     void loadingStateChanged(const QCefBrowserId& browserId, bool isLoading, bool canGoBack, bool canGoForward);
@@ -118,10 +123,6 @@ protected:
     virtual void onUpdateDownloadItem(const QSharedPointer<QCefDownloadItem>& item);
     virtual bool onRequestCloseFromWeb();
 
-public:
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const;
-
-protected:
     virtual QPaintEngine* paintEngine() const;
     virtual void paintEvent(QPaintEvent* event);
     virtual bool event(QEvent* event);
