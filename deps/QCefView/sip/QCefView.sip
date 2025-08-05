@@ -5,6 +5,9 @@
 
 %Include QCefConfig.sip
 %Include QCefContext.sip
+%Include QCefDownloadItem.sip
+%Include QCefEvent.sip
+%Include QCefQuery.sip
 %Include QCefSetting.sip
 
 class QCefView : public QWidget {
