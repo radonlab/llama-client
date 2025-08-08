@@ -20,8 +20,8 @@ class QCefView : public QWidget {
 %End
 
 public:
-    static const QCefFrameId MainFrameID;
-    static const QCefFrameId AllFrameID;
+    static const QString MainFrameID;
+    static const QString AllFrameID;
 
     enum CefWindowOpenDisposition {
         CefWindowOpenDispositionUnknown,
@@ -44,7 +44,7 @@ public:
     ~QCefView();
     void addLocalFolderResource(const QString& path, const QString& url, int priority = 0);
     void addArchiveResource(const QString& path, const QString& url, const QString& password = "", int priority = 0);
-    QCefBrowserId browserId();
+    int browserId();
     void navigateToString(const QString& content);
     void navigateToUrl(const QString& url);
     bool browserCanGoBack();
@@ -55,11 +55,11 @@ public:
     void browserReload();
     void browserStopLoad();
     bool triggerEvent(const QCefEvent& event);
-    bool triggerEvent(const QCefEvent& event, const QCefFrameId& frameId);
+    bool triggerEvent(const QCefEvent& event, const QString& frameId);
     bool broadcastEvent(const QCefEvent& event);
     bool responseQCefQuery(const QCefQuery& query);
-    bool executeJavascript(const QCefFrameId& frameId, const QString& code, const QString& url);
-    bool executeJavascriptWithResult(const QCefFrameId& frameId,
+    bool executeJavascript(const QString& frameId, const QString& code, const QString& url);
+    bool executeJavascriptWithResult(const QString& frameId,
                                      const QString& code,
                                      const QString& url,
                                      const QString& context);
@@ -76,43 +76,43 @@ public:
     virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const;
 
 signals:
-    void loadingStateChanged(const QCefBrowserId& browserId, bool isLoading, bool canGoBack, bool canGoForward);
-    void loadStart(const QCefBrowserId& browserId, const QCefFrameId& frameId, bool isMainFrame, int transitionType);
-    void loadEnd(const QCefBrowserId& browserId, const QCefFrameId& frameId, bool isMainFrame, int httpStatusCode);
-    void loadError(const QCefBrowserId& browserId,
-                   const QCefFrameId& frameId,
+    void loadingStateChanged(const int& browserId, bool isLoading, bool canGoBack, bool canGoForward);
+    void loadStart(const int& browserId, const QString& frameId, bool isMainFrame, int transitionType);
+    void loadEnd(const int& browserId, const QString& frameId, bool isMainFrame, int httpStatusCode);
+    void loadError(const int& browserId,
+                   const QString& frameId,
                    bool isMainFrame,
                    int errorCode,
                    const QString& errorMsg,
                    const QString& failedUrl);
     void draggableRegionChanged(const QRegion& draggableRegion, const QRegion& nonDraggableRegion);
-    void addressChanged(const QCefFrameId& frameId, const QString& url);
+    void addressChanged(const QString& frameId, const QString& url);
     void titleChanged(const QString& title);
     void faviconURLChanged(const QStringList& urls);
     void fullscreenModeChanged(bool fullscreen);
     void statusMessage(const QString& message);
     void consoleMessage(const QString& message, int level);
     void loadingProgressChanged(double progress);
-    void cefUrlRequest(const QCefBrowserId& browserId, const QCefFrameId& frameId, const QString& url);
-    void cefQueryRequest(const QCefBrowserId& browserId, const QCefFrameId& frameId, const QCefQuery& query);
-    void invokeMethod(const QCefBrowserId& browserId,
-                      const QCefFrameId& frameId,
+    void cefUrlRequest(const int& browserId, const QString& frameId, const QString& url);
+    void cefQueryRequest(const int& browserId, const QString& frameId, const QCefQuery& query);
+    void invokeMethod(const int& browserId,
+                      const QString& frameId,
                       const QString& method,
                       const QVariantList& arguments);
-    void reportJavascriptResult(const QCefBrowserId& browserId,
-                                const QCefFrameId& frameId,
+    void reportJavascriptResult(const int& browserId,
+                                const QString& frameId,
                                 const QString& context,
                                 const QVariant& result);
     void nativeBrowserCreated(QWindow* window);
 
 protected:
-    virtual QCefView* onNewBrowser(const QCefFrameId& sourceFrameId,
+    virtual QCefView* onNewBrowser(const QString& sourceFrameId,
                                    const QString& url,
                                    const QString& name,
                                    QCefView::CefWindowOpenDisposition targetDisposition,
                                    QRect& rect,
                                    QCefSetting& settings);
-    virtual bool onNewPopup(const QCefFrameId& frameId,
+    virtual bool onNewPopup(const QString& frameId,
                             const QString& targetUrl,
                             QString& targetFrameName,
                             QCefView::CefWindowOpenDisposition targetDisposition,
