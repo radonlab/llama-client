@@ -119,8 +119,8 @@ protected:
                             QRect& rect,
                             QCefSetting& settings,
                             bool& disableJavascriptAccess);
-    virtual void onNewDownloadItem(const QSharedPointer<QCefDownloadItem>& item, const QString& suggestedName);
-    virtual void onUpdateDownloadItem(const QSharedPointer<QCefDownloadItem>& item);
+    // virtual void onNewDownloadItem(const QSharedPointer<QCefDownloadItem>& item, const QString& suggestedName);
+    // virtual void onUpdateDownloadItem(const QSharedPointer<QCefDownloadItem>& item);
     virtual bool onRequestCloseFromWeb();
 
     virtual QPaintEngine* paintEngine() const;
